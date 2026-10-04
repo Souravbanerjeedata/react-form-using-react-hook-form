@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
 
 const SignupForm = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   function onSubmit(data) {
     alert(
       `Your email: "${data.email}" and password: "${data.password}" have been submitted.`,
@@ -20,6 +24,9 @@ const SignupForm = () => {
               {...register("email", { required: "Email is required" })}
             />
           </label>
+          {errors.email && (
+            <p style={{ color: "crimson" }}>{errors.email.message}</p>
+          )}
         </div>
         <div style={{ marginBottom: ".5rem" }}>
           <label>
@@ -40,6 +47,9 @@ const SignupForm = () => {
               })}
             />
           </label>
+          {errors.password && (
+            <p style={{ color: "crimson" }}>{errors.password.message}</p>
+          )}
         </div>
         <button type="submit">Submit</button>
       </form>
